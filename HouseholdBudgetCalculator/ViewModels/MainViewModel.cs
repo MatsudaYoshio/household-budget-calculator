@@ -7,9 +7,10 @@ using System.Text;
 
 namespace HouseholdBudgetCalculator.ViewModels
 {
-    public partial class MainViewModel(CsvReaderService csvReaderService) : ObservableObject
+    public partial class MainViewModel(CsvReaderService csvReaderService, ProductFactory productFactory) : ObservableObject
     {
         private readonly CsvReaderService _csvReaderService = csvReaderService;
+        private readonly ProductFactory _productFactory = productFactory;
 
         [ObservableProperty]
         private ObservableCollection<CsvData> _csvDataList = [];
@@ -27,6 +28,7 @@ namespace HouseholdBudgetCalculator.ViewModels
                 var filePath = openFileDialog.FileName;
                 var data = _csvReaderService.LoadCsv(filePath, Encoding.UTF8);
                 CsvDataList = [.. data];
+                var products = _productFactory.Create(data);
             }
         }
     }
