@@ -8,6 +8,9 @@ on:
       - reopened
     branches: dev
 
+env:
+  PROJECT_NAME: HouseholdBudgetCalculator
+
 jobs:
   build:
     runs-on: windows-latest
@@ -22,10 +25,10 @@ jobs:
           dotnet-version: "9.0.x"
 
       - name: NuGet パッケージの復元
-        run: dotnet restore HouseholdBudgetCalculator.csproj
+        run: dotnet restore ./${{ env.PROJECT_NAME }}/${{ env.PROJECT_NAME }}.csproj
 
       - name: アプリケーションのビルド(Release)
-        run: dotnet build HouseholdBudgetCalculator.csproj --configuration Release --no-restore
+        run: dotnet build ./${{ env.PROJECT_NAME }}/${{ env.PROJECT_NAME }}.csproj --configuration Release --no-restore
 
       - name: 成果物のアップロード
         uses: actions/upload-artifact@v4
