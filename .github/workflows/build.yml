@@ -33,6 +33,6 @@ jobs:
       - name: 成果物のアップロード
         uses: actions/upload-artifact@v4
         with:
-          name: WPF-App
+          name: ${{ env.PROJECT_NAME }}
           path: |
             **/bin/Release/net9.0-windows/
