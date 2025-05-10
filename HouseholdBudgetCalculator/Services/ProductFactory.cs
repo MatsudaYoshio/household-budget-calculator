@@ -8,7 +8,6 @@ namespace HouseholdBudgetCalculator.Services
 
         public Product Create(CsvData csvData)
         {
-
             var category = _productRepository.Get(csvData.ProductName.Value);
 
             return new Product

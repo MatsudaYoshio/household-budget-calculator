@@ -12,7 +12,10 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Button Content="Load CSV" Command="{Binding LoadCsvFileCommand}" Margin="10"/>
+        <StackPanel Orientation="Horizontal" Margin="10">
+            <Button Content="Load CSV" Command="{Binding LoadCsvFileCommand}" Margin="5,0"/>
+            <Button Content="Show Summary" Command="{Binding ShowCategorySummaryWindowCommand}" Margin="5,0"/>
+        </StackPanel>
 
         <DataGrid Grid.Row="1" ItemsSource="{Binding CsvDataList}" AutoGenerateColumns="True" Margin="10"/>
     </Grid>
