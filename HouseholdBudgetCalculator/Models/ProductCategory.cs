@@ -4,14 +4,14 @@
     {
         Unknown,
         Food,
-        Special
+        Transport
     }
 
     public static class ProductCategoryExtensions
     {
         public static ProductCategory ConvertToEnum(string category)
         {
-            if (Enum.TryParse<ProductCategory>(category, true, out ProductCategory result))
+            if (Enum.TryParse(category, true, out ProductCategory result))
             {
                 return result;
             }
