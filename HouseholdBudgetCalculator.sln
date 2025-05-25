@@ -5,6 +5,8 @@ VisualStudioVersion = 17.13.35828.75 d17.13
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HouseholdBudgetCalculator", "HouseholdBudgetCalculator\HouseholdBudgetCalculator.csproj", "{359E272E-61C2-489B-9B65-57319B905714}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HouseholdBudgetCalculator.Tests", "HouseholdBudgetCalculator.Tests\HouseholdBudgetCalculator.Tests.csproj", "{A9127BB1-15C5-462F-925D-5D566B74FA88}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{359E272E-61C2-489B-9B65-57319B905714}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{359E272E-61C2-489B-9B65-57319B905714}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{359E272E-61C2-489B-9B65-57319B905714}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9127BB1-15C5-462F-925D-5D566B74FA88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9127BB1-15C5-462F-925D-5D566B74FA88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9127BB1-15C5-462F-925D-5D566B74FA88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9127BB1-15C5-462F-925D-5D566B74FA88}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
