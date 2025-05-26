@@ -1,12 +1,7 @@
+using HouseholdBudgetCalculator.Models;
+using HouseholdBudgetCalculator.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using HouseholdBudgetCalculator.Services; // Resolves to local copy
-using HouseholdBudgetCalculator.Models;   // Resolves to local copy
-using System.IO;
-using System.Linq;
-using System.Collections.Generic;
-using System.Text; // For Encoding
-using CsvHelper; // General CsvHelper namespace
-using CsvHelper.TypeConversion; // For TypeConverterException
+using System.Text;
 
 namespace HouseholdBudgetCalculator.Tests
 {
@@ -76,7 +71,7 @@ namespace HouseholdBudgetCalculator.Tests
                 new CsvData { ProductName = new ProductName("UTF16 Product A"), TotalPaymentAmount = 500 },
                 new CsvData { ProductName = new ProductName("UTF16 Product B"), TotalPaymentAmount = 600 }
             };
-            
+
             // Act
             var actualData = _csvReaderService.LoadCsv(filePath, Encoding.Unicode).ToList(); // Encoding.Unicode is for UTF-16
 
