@@ -27,7 +27,10 @@ jobs:
       - name: NuGet パッケージの復元
         run: dotnet restore ./${{ env.PROJECT_NAME }}/${{ env.PROJECT_NAME }}.csproj
 
-      - name: アプリケーションのビルド(Release)
+      - name: テストの実行
+        run: dotnet test ./${{ env.PROJECT_NAME }}.Tests/${{ env.PROJECT_NAME }}.Tests.csproj --configuration Release --no-restore
+
+      - name: アプリケーションのビルド (Release)
         run: dotnet build ./${{ env.PROJECT_NAME }}/${{ env.PROJECT_NAME }}.csproj --configuration Release --no-restore
 
       - name: 成果物のアップロード
