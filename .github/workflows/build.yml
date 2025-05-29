@@ -25,7 +25,9 @@ jobs:
           dotnet-version: "9.0.x"
 
       - name: NuGet パッケージの復元
-        run: dotnet restore ./${{ env.PROJECT_NAME }}/${{ env.PROJECT_NAME }}.csproj
+        run: |
+          dotnet restore ./${{ env.PROJECT_NAME }}/${{ env.PROJECT_NAME }}.csproj
+          dotnet restore ./${{ env.PROJECT_NAME }}.Tests/${{ env.PROJECT_NAME }}.Tests.csproj
 
       - name: テストの実行
         run: dotnet test ./${{ env.PROJECT_NAME }}.Tests/${{ env.PROJECT_NAME }}.Tests.csproj --configuration Release --no-restore
