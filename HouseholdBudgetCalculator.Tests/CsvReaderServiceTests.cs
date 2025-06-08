@@ -31,9 +31,9 @@ namespace HouseholdBudgetCalculator.Tests
             string filePath = Path.Combine(_testDataPath, "valid_data.csv");
             var expectedData = new List<CsvData>
             {
-                new() { ProductName = new ProductName("エコバックＳｔａｔｉｏｎ"), TotalPaymentAmount = 1320 },
-                new() { ProductName = new ProductName("東急ストア"), TotalPaymentAmount = 70238 },
-                new() { ProductName = new ProductName("セブンイレブン"), TotalPaymentAmount = 270445 }
+                new() { ProductName = new ProductName("エコバックＳｔａｔｉｏｎ"), TotalPaymentAmount = 1320, DateOfUse = "2025/2/28" },
+                new() { ProductName = new ProductName("東急ストア"), TotalPaymentAmount = 70238, DateOfUse = "2025/2/28" },
+                new() { ProductName = new ProductName("セブンイレブン"), TotalPaymentAmount = 270445, DateOfUse = "2025/2/26" }
             };
 
             // Act
@@ -45,6 +45,7 @@ namespace HouseholdBudgetCalculator.Tests
             {
                 Assert.AreEqual(expectedData[i].ProductName.Value, actualData[i].ProductName.Value, $"ProductName mismatch at record {i}.");
                 Assert.AreEqual(expectedData[i].TotalPaymentAmount, actualData[i].TotalPaymentAmount, $"TotalPaymentAmount mismatch at record {i}.");
+                Assert.AreEqual(expectedData[i].DateOfUse, actualData[i].DateOfUse, $"DateOfUse mismatch at record {i}.");
             }
         }
 

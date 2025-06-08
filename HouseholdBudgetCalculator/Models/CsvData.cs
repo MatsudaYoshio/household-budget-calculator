@@ -10,6 +10,8 @@ namespace HouseholdBudgetCalculator.Models
         [Name("利用店名・商品名")]
         [TypeConverter(typeof(ProductNameConverter))]
         public ProductName ProductName { get; set; } = null!;
+        [Name("利用日/キャンセル日")]
+        public string DateOfUse { get; set; } = string.Empty;
         [Name("支払総額")]
         public int TotalPaymentAmount { get; set; }
     }

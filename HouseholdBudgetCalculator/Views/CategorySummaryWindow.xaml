@@ -17,6 +17,8 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
 
+                <DataGridTextColumn Header="日付" Binding="{Binding DateOfUse}" />
+
                 <!-- 合計金額列 -->
                 <DataGridTemplateColumn Header="合計金額">
                     <DataGridTemplateColumn.CellTemplate>

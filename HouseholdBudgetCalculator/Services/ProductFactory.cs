@@ -13,6 +13,7 @@ namespace HouseholdBudgetCalculator.Services
             return new Product
             {
                 Name = csvData.ProductName,
+                DateOfUse = csvData.DateOfUse,
                 TotalPaymentAmount = csvData.TotalPaymentAmount,
                 Category = category == null ? ProductCategory.Unknown : ProductCategoryExtensions.ConvertToEnum(category)
             };
