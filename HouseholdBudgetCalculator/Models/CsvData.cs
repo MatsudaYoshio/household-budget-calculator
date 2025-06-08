@@ -22,22 +22,18 @@ namespace HouseholdBudgetCalculator.Models
 
     public class DateOnlyConverter : ITypeConverter
     {
+        private static readonly string DATE_FORMAT = "yyyy/M/d";
+
         public object? ConvertFromString(string? text, IReaderRow row, MemberMapData memberMapData)
         {
             if (string.IsNullOrEmpty(text)) return null;
-            try
-            {
-                return DateOnly.ParseExact(text, "yyyy/M/d", CultureInfo.InvariantCulture);
-            }
-            catch (FormatException)
-            {
-                return null;
-            }
+            if (DateOnly.TryParseExact(text, DATE_FORMAT, out var dateOnly)) return dateOnly;
+            return null;
         }
 
         public string? ConvertToString(object? value, IWriterRow row, MemberMapData memberMapData)
         {
-            return (value is DateOnly dateOnly) ? dateOnly.ToString("yyyy/M/d", CultureInfo.InvariantCulture) : string.Empty;
+            return (value is DateOnly dateOnly) ? dateOnly.ToString(DATE_FORMAT, CultureInfo.InvariantCulture) : string.Empty;
         }
     }
 
