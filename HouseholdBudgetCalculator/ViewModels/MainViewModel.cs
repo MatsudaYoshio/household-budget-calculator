@@ -1,4 +1,4 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using HouseholdBudgetCalculator.Models;
 using HouseholdBudgetCalculator.Services;
@@ -54,6 +54,7 @@ namespace HouseholdBudgetCalculator.ViewModels
                     CategoryName = category.Key.ToString(),
                     ProductName = string.Empty, // Unknown以外は空欄
                     TotalAmount = category.Value
+                    // DateOfUse remains null for grouped categories
                 });
             }
 
@@ -66,7 +67,8 @@ namespace HouseholdBudgetCalculator.ViewModels
                 {
                     CategoryName = ProductCategory.Unknown.ToString(),
                     ProductName = product.Name.Value,
-                    TotalAmount = product.TotalPaymentAmount
+                    TotalAmount = product.TotalPaymentAmount,
+                    DateOfUse = product.DateOfUse // This correctly assigns DateOnly? to DateOnly?
                 });
             }
 

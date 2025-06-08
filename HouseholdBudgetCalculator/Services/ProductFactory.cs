@@ -1,4 +1,4 @@
-﻿using HouseholdBudgetCalculator.Models;
+using HouseholdBudgetCalculator.Models;
 
 namespace HouseholdBudgetCalculator.Services
 {
@@ -13,6 +13,7 @@ namespace HouseholdBudgetCalculator.Services
             return new Product
             {
                 Name = csvData.ProductName,
+                DateOfUse = csvData.DateOfUse, // This should now correctly assign DateOnly? to DateOnly?
                 TotalPaymentAmount = csvData.TotalPaymentAmount,
                 Category = category == null ? ProductCategory.Unknown : ProductCategoryExtensions.ConvertToEnum(category)
             };
