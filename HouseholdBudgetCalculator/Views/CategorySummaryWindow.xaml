@@ -17,7 +17,16 @@
             </DataGrid.Resources>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="カテゴリ名" Binding="{Binding CategoryName}" />
-                <DataGridTextColumn Header="利用日" Binding="{Binding DateOfUse, StringFormat='yyyy/M/d'}" ElementStyle="{StaticResource DateVisibilityStyle}" />
+                <DataGridTemplateColumn Header="利用日">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding DateOfUse, StringFormat='yyyy/M/d'}" 
+                                       MouseLeftButtonUp="CopyToClipboard" 
+                                       Tag="{Binding DateOfUse}" 
+                                       Cursor="Hand" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTemplateColumn Header="Product名">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
