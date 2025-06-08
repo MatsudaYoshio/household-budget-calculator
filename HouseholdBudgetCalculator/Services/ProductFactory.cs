@@ -14,7 +14,8 @@ namespace HouseholdBudgetCalculator.Services
             {
                 Name = csvData.ProductName,
                 TotalPaymentAmount = csvData.TotalPaymentAmount,
-                Category = category == null ? ProductCategory.Unknown : ProductCategoryExtensions.ConvertToEnum(category)
+                Category = category == null ? ProductCategory.Unknown : ProductCategoryExtensions.ConvertToEnum(category),
+                DateOfUse = csvData.DateOfUse
             };
         }
 

@@ -1,4 +1,5 @@
 ﻿using HouseholdBudgetCalculator.ViewModels;
+using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Input;
 
@@ -16,7 +17,14 @@ namespace HouseholdBudgetCalculator.Views
         {
             if (sender is FrameworkElement element && element.Tag is not null)
             {
-                Clipboard.SetText(element.Tag.ToString());
+                try
+                {
+                    Dispatcher.Invoke(() => Clipboard.SetText(element.Tag.ToString()));
+                }
+                catch (COMException)
+                {
+                    MessageBox.Show("Failed to access the clipboard. Please try again.");
+                }
             }
         }
     }
