@@ -33,7 +33,11 @@ namespace HouseholdBudgetCalculator.Tests
             {
                 new() { DateOfUse = new DateOnly(2025, 2, 28), ProductName = new ProductName("ＰａｙＰａｙ　エコバックＳｔａｔｉｏｎ"), TotalPaymentAmount = 1320 },
                 new() { DateOfUse = new DateOnly(2025, 12, 31), ProductName = new ProductName("ＰａｙＰａｙ　東急ストア"), TotalPaymentAmount = 70238 },
-                new() { DateOfUse = new DateOnly(2025, 1, 1), ProductName = new ProductName("ＰａｙＰａｙ　セブンイレブン"), TotalPaymentAmount = 270445 }
+                new() { DateOfUse = new DateOnly(2025, 1, 1), ProductName = new ProductName("ＰａｙＰａｙ　セブンイレブン"), TotalPaymentAmount = 270445 },
+                new() { DateOfUse = new DateOnly(2025, 3, 15), ProductName = new ProductName("ＰａｙＰａｙ　ファミリーマート"), TotalPaymentAmount = 500 },
+                new() { DateOfUse = new DateOnly(2025, 4, 10), ProductName = new ProductName("ＰａｙＰａｙ　ローソン"), TotalPaymentAmount = 1200 },
+                new() { DateOfUse = new DateOnly(2025, 5, 20), ProductName = new ProductName("ＰａｙＰａｙ　マクドナルド"), TotalPaymentAmount = 850 },
+                new() { DateOfUse = new DateOnly(2025, 6, 5), ProductName = new ProductName("ＰａｙＰａｙ　イオン"), TotalPaymentAmount = 3000 }
             };
 
             // Act
