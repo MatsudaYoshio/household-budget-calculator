@@ -2,7 +2,6 @@
 using CsvHelper.Configuration;
 using CsvHelper.Configuration.Attributes;
 using CsvHelper.TypeConversion;
-using System;
 using System.Globalization;
 
 namespace HouseholdBudgetCalculator.Models
@@ -12,21 +11,20 @@ namespace HouseholdBudgetCalculator.Models
         [Name("利用日/キャンセル日")]
         [TypeConverter(typeof(DateOnlyConverter))]
         public DateOnly? DateOfUse { get; set; }
+
         [Name("利用店名・商品名")]
         [TypeConverter(typeof(ProductNameConverter))]
         public ProductName ProductName { get; set; } = null!;
+
         [Name("支払総額")]
         public int TotalPaymentAmount { get; set; }
     }
 
-    public class DateOnlyConverter : CsvHelper.TypeConversion.TypeConverter, ITypeConverter
+    public class DateOnlyConverter : ITypeConverter
     {
-        public override object? ConvertFromString(string? text, IReaderRow row, MemberMapData memberMapData)
+        public object? ConvertFromString(string? text, IReaderRow row, MemberMapData memberMapData)
         {
-            if (string.IsNullOrEmpty(text))
-            {
-                return null;
-            }
+            if (string.IsNullOrEmpty(text)) return null;
             try
             {
                 return DateOnly.ParseExact(text, "yyyy/M/d", CultureInfo.InvariantCulture);
@@ -37,13 +35,9 @@ namespace HouseholdBudgetCalculator.Models
             }
         }
 
-        public override string? ConvertToString(object? value, IWriterRow row, MemberMapData memberMapData)
+        public string? ConvertToString(object? value, IWriterRow row, MemberMapData memberMapData)
         {
-            if (value is DateOnly dateOnly)
-            {
-                return dateOnly.ToString("yyyy/M/d", CultureInfo.InvariantCulture);
-            }
-            return string.Empty;
+            return (value is DateOnly dateOnly) ? dateOnly.ToString("yyyy/M/d", CultureInfo.InvariantCulture) : string.Empty;
         }
     }
 

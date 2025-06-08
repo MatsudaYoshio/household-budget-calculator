@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace HouseholdBudgetCalculator.Models
+﻿namespace HouseholdBudgetCalculator.Models
 {
     public class Product
     {

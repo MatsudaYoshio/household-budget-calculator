@@ -1,7 +1,6 @@
 using HouseholdBudgetCalculator.Models;
 using HouseholdBudgetCalculator.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Text;
 
 namespace HouseholdBudgetCalculator.Tests
@@ -33,8 +32,8 @@ namespace HouseholdBudgetCalculator.Tests
             var expectedData = new List<CsvData>
             {
                 new() { DateOfUse = new DateOnly(2025, 2, 28), ProductName = new ProductName("ＰａｙＰａｙ　エコバックＳｔａｔｉｏｎ"), TotalPaymentAmount = 1320 },
-                new() { DateOfUse = new DateOnly(2025, 2, 28), ProductName = new ProductName("ＰａｙＰａｙ　東急ストア"), TotalPaymentAmount = 70238 },
-                new() { DateOfUse = new DateOnly(2025, 2, 26), ProductName = new ProductName("ＰａｙＰａｙ　セブンイレブン"), TotalPaymentAmount = 270445 }
+                new() { DateOfUse = new DateOnly(2025, 12, 31), ProductName = new ProductName("ＰａｙＰａｙ　東急ストア"), TotalPaymentAmount = 70238 },
+                new() { DateOfUse = new DateOnly(2025, 1, 1), ProductName = new ProductName("ＰａｙＰａｙ　セブンイレブン"), TotalPaymentAmount = 270445 }
             };
 
             // Act
