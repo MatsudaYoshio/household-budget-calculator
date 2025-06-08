@@ -66,7 +66,8 @@ namespace HouseholdBudgetCalculator.ViewModels
                 {
                     CategoryName = ProductCategory.Unknown.ToString(),
                     ProductName = product.Name.Value,
-                    TotalAmount = product.TotalPaymentAmount
+                    TotalAmount = product.TotalPaymentAmount,
+                    DateOfUse = product.DateOfUse
                 });
             }
 

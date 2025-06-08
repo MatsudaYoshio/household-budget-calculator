@@ -4,8 +4,19 @@
         Title="カテゴリ別集計結果" Height="450" Width="800">
     <Grid>
         <DataGrid ItemsSource="{Binding CategorySummaries}" AutoGenerateColumns="False" HeadersVisibility="Column">
+            <DataGrid.Resources>
+                <Style TargetType="TextBlock" x:Key="DateVisibilityStyle">
+                    <Setter Property="Visibility" Value="Collapsed" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding CategoryName}" Value="Unknown">
+                            <Setter Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.Resources>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="カテゴリ名" Binding="{Binding CategoryName}" />
+                <DataGridTextColumn Header="利用日" Binding="{Binding DateOfUse, StringFormat='yyyy/M/d'}" ElementStyle="{StaticResource DateVisibilityStyle}" />
                 <DataGridTemplateColumn Header="Product名">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

@@ -1,6 +1,7 @@
 using HouseholdBudgetCalculator.Models;
 using HouseholdBudgetCalculator.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Text;
 
 namespace HouseholdBudgetCalculator.Tests
@@ -31,9 +32,9 @@ namespace HouseholdBudgetCalculator.Tests
             string filePath = Path.Combine(_testDataPath, "valid_data.csv");
             var expectedData = new List<CsvData>
             {
-                new() { ProductName = new ProductName("エコバックＳｔａｔｉｏｎ"), TotalPaymentAmount = 1320 },
-                new() { ProductName = new ProductName("東急ストア"), TotalPaymentAmount = 70238 },
-                new() { ProductName = new ProductName("セブンイレブン"), TotalPaymentAmount = 270445 }
+                new() { DateOfUse = new DateOnly(2025, 2, 28), ProductName = new ProductName("ＰａｙＰａｙ　エコバックＳｔａｔｉｏｎ"), TotalPaymentAmount = 1320 },
+                new() { DateOfUse = new DateOnly(2025, 2, 28), ProductName = new ProductName("ＰａｙＰａｙ　東急ストア"), TotalPaymentAmount = 70238 },
+                new() { DateOfUse = new DateOnly(2025, 2, 26), ProductName = new ProductName("ＰａｙＰａｙ　セブンイレブン"), TotalPaymentAmount = 270445 }
             };
 
             // Act
@@ -43,6 +44,7 @@ namespace HouseholdBudgetCalculator.Tests
             Assert.AreEqual(expectedData.Count, actualData.Count, "Number of records should match.");
             for (int i = 0; i < expectedData.Count; i++)
             {
+                Assert.AreEqual(expectedData[i].DateOfUse, actualData[i].DateOfUse, $"DateOfUse mismatch at record {i}.");
                 Assert.AreEqual(expectedData[i].ProductName.Value, actualData[i].ProductName.Value, $"ProductName mismatch at record {i}.");
                 Assert.AreEqual(expectedData[i].TotalPaymentAmount, actualData[i].TotalPaymentAmount, $"TotalPaymentAmount mismatch at record {i}.");
             }

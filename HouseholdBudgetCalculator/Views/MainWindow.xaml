@@ -17,6 +17,12 @@
             <Button Content="Show Summary" Command="{Binding ShowCategorySummaryWindowCommand}" Margin="5,0"/>
         </StackPanel>
 
-        <DataGrid Grid.Row="1" ItemsSource="{Binding CsvDataList}" AutoGenerateColumns="True" Margin="10"/>
+        <DataGrid Grid.Row="1" ItemsSource="{Binding CsvDataList}" AutoGenerateColumns="False" Margin="10" HeadersVisibility="Column">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="利用日/キャンセル日" Binding="{Binding DateOfUse, StringFormat='yyyy/M/d'}" />
+                <DataGridTextColumn Header="利用店名・商品名" Binding="{Binding ProductName}" />
+                <DataGridTextColumn Header="支払総額" Binding="{Binding TotalPaymentAmount}" />
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>
