@@ -4,7 +4,10 @@
     {
         Unknown,
         Food,
-        Transport
+        Transport,
+        Healthcare,
+        Education,
+        Clothing,
     }
 
     public static class ProductCategoryExtensions
