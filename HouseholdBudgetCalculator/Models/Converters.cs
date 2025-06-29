@@ -1,19 +1,11 @@
-﻿using CsvHelper;
+using CsvHelper;
 using CsvHelper.Configuration;
-using CsvHelper.Configuration.Attributes;
 using CsvHelper.TypeConversion;
+using System;
 using System.Globalization;
 
 namespace HouseholdBudgetCalculator.Models
 {
-    public class CsvData
-    {
-        [TypeConverter(typeof(DateOnlyConverter))]
-        public DateOnly? DateOfUse { get; set; }
-        public ProductName ProductName { get; set; } = null!;
-        public int TotalPaymentAmount { get; set; }
-    }
-
     public class DateOnlyConverter : ITypeConverter
     {
         private static readonly string DATE_FORMAT = "yyyy/M/d";
@@ -21,7 +13,9 @@ namespace HouseholdBudgetCalculator.Models
         public object? ConvertFromString(string? text, IReaderRow row, MemberMapData memberMapData)
         {
             if (string.IsNullOrEmpty(text)) return null;
-            if (DateOnly.TryParseExact(text, DATE_FORMAT, out var dateOnly)) return dateOnly;
+            if (DateOnly.TryParseExact(text, DATE_FORMAT, CultureInfo.InvariantCulture, DateTimeStyles.None, out var dateOnly)) return dateOnly;
+            // TryParseExactが失敗した場合、nullではなく例外をスローするか、エラー処理を検討する
+            // ここでは一旦 null を返す（CsvHelperのデフォルトの挙動に近い）
             return null;
         }
 

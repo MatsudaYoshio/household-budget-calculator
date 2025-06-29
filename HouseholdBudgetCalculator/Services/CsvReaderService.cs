@@ -1,32 +1,38 @@
 ﻿using CsvHelper;
 using CsvHelper.Configuration;
 using HouseholdBudgetCalculator.Models;
+using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace HouseholdBudgetCalculator.Services
 {
     public class CsvReaderService
     {
-        public List<CsvData> LoadCsv(string filePath, Encoding encoding, CsvFormatType formatType)
+        public List<ICsvData> LoadCsv(string filePath, Encoding encoding, CsvFormatType formatType)
         {
-            var formatDefinition = GetCsvFormatDefinition(formatType);
+            ICsvData csvDataTemplate = CreateCsvDataTemplate(formatType);
+            var formatDefinition = csvDataTemplate.FormatDefinition;
+
             var csvConfiguration = new CsvConfiguration(CultureInfo.InvariantCulture)
             {
                 HasHeaderRecord = true,
                 BadDataFound = null,
                 MissingFieldFound = null,
+                TypeConverterCache = new TypeConverterCache()
             };
+            csvConfiguration.TypeConverterCache.AddConverter<DateOnly?>(new DateOnlyConverter());
 
             using var reader = new StreamReader(filePath, encoding);
             using var csv = new CsvReader(reader, csvConfiguration);
 
-            // ヘッダー行を読み飛ばす
             csv.Read();
             csv.ReadHeader();
 
-            var records = new List<CsvData>();
+            var records = new List<ICsvData>();
             while (csv.Read())
             {
                 var dateOfUse = csv.GetField<DateOnly?>(formatDefinition.DateOfUseHeader);
@@ -34,22 +40,22 @@ namespace HouseholdBudgetCalculator.Services
                 var productName = new ProductName(productNameString ?? string.Empty, formatDefinition.ProductNamePrefix);
                 var totalPaymentAmount = csv.GetField<int>(formatDefinition.TotalPaymentAmountHeader);
 
-                records.Add(new CsvData
-                {
-                    DateOfUse = dateOfUse,
-                    ProductName = productName,
-                    TotalPaymentAmount = totalPaymentAmount
-                });
+                // インスタンスの生成方法を改善する必要があるかもしれない
+                ICsvData recordInstance = CreateCsvDataTemplate(formatType);
+                recordInstance.DateOfUse = dateOfUse;
+                recordInstance.ProductName = productName;
+                recordInstance.TotalPaymentAmount = totalPaymentAmount;
+                records.Add(recordInstance);
             }
             return records;
         }
 
-        private CsvFormatDefinition GetCsvFormatDefinition(CsvFormatType formatType)
+        private ICsvData CreateCsvDataTemplate(CsvFormatType formatType)
         {
             return formatType switch
             {
-                CsvFormatType.PayPay => CsvFormatDefinition.PayPayDefinition,
-                // 他のCSV形式の定義をここに追加
+                CsvFormatType.PayPay => new PayPayCsvData(),
+                // 他のCSV形式のインスタンス生成をここに追加
                 _ => throw new ArgumentOutOfRangeException(nameof(formatType), $"Unsupported CSV format: {formatType}"),
             };
         }

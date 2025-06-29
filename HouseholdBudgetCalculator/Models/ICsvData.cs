@@ -1,12 +1,15 @@
-﻿using CsvHelper.Configuration.Attributes;
+using CsvHelper.Configuration.Attributes;
+using CsvHelper.TypeConversion;
+using HouseholdBudgetCalculator.Services; // CsvFormatDefinition を使うため
 
 namespace HouseholdBudgetCalculator.Models
 {
-    internal interface ICsvData
+    public interface ICsvData
     {
-        [TypeConverter(typeof(DateOnlyConverter))]
-        public DateOnly? DateOfUse { get; set; }
-        public ProductName ProductName { get; set; }
-        public int TotalPaymentAmount { get; set; }
+        [TypeConverter(typeof(DateOnlyConverter))] // この属性は具象クラス側に持たせるべきか検討
+        DateOnly? DateOfUse { get; set; }
+        ProductName ProductName { get; set; }
+        int TotalPaymentAmount { get; set; }
+        CsvFormatDefinition FormatDefinition { get; } // プロパティ名を変更しました
     }
 }
