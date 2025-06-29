@@ -25,23 +25,23 @@ namespace HouseholdBudgetCalculator.Tests
         }
 
         [TestMethod]
-        public void LoadCsv_ValidFile_ReturnsCorrectData()
+        public void LoadCsv_ValidFile_PayPayFormat_ReturnsCorrectData()
         {
             // Arrange
             string filePath = Path.Combine(_testDataPath, "valid_data.csv");
             var expectedData = new List<CsvData>
             {
-                new() { DateOfUse = new DateOnly(2025, 2, 28), ProductName = new ProductName("ＰａｙＰａｙ　エコバックＳｔａｔｉｏｎ"), TotalPaymentAmount = 1320 },
-                new() { DateOfUse = new DateOnly(2025, 12, 31), ProductName = new ProductName("ＰａｙＰａｙ　東急ストア"), TotalPaymentAmount = 70238 },
-                new() { DateOfUse = new DateOnly(2025, 1, 1), ProductName = new ProductName("ＰａｙＰａｙ　セブンイレブン"), TotalPaymentAmount = 270445 },
-                new() { DateOfUse = new DateOnly(2025, 3, 15), ProductName = new ProductName("ＰａｙＰａｙ　ファミリーマート"), TotalPaymentAmount = 500 },
-                new() { DateOfUse = new DateOnly(2025, 4, 10), ProductName = new ProductName("ＰａｙＰａｙ　ローソン"), TotalPaymentAmount = 1200 },
-                new() { DateOfUse = new DateOnly(2025, 5, 20), ProductName = new ProductName("ＰａｙＰａｙ　マクドナルド"), TotalPaymentAmount = 850 },
-                new() { DateOfUse = new DateOnly(2025, 6, 5), ProductName = new ProductName("ＰａｙＰａｙ　イオン"), TotalPaymentAmount = 3000 }
+                new() { DateOfUse = new DateOnly(2025, 2, 28), ProductName = new ProductName("エコバックＳｔａｔｉｏｎ", "ＰａｙＰａｙ　"), TotalPaymentAmount = 1320 },
+                new() { DateOfUse = new DateOnly(2025, 12, 31), ProductName = new ProductName("東急ストア", "ＰａｙＰａｙ　"), TotalPaymentAmount = 70238 },
+                new() { DateOfUse = new DateOnly(2025, 1, 1), ProductName = new ProductName("セブンイレブン", "ＰａｙＰａｙ　"), TotalPaymentAmount = 270445 },
+                new() { DateOfUse = new DateOnly(2025, 3, 15), ProductName = new ProductName("ファミリーマート", "ＰａｙＰａｙ　"), TotalPaymentAmount = 500 },
+                new() { DateOfUse = new DateOnly(2025, 4, 10), ProductName = new ProductName("ローソン", "ＰａｙＰａｙ　"), TotalPaymentAmount = 1200 },
+                new() { DateOfUse = new DateOnly(2025, 5, 20), ProductName = new ProductName("マクドナルド", "ＰａｙＰａｙ　"), TotalPaymentAmount = 850 },
+                new() { DateOfUse = new DateOnly(2025, 6, 5), ProductName = new ProductName("イオン", "ＰａｙＰａｙ　"), TotalPaymentAmount = 3000 }
             };
 
             // Act
-            var actualData = _csvReaderService.LoadCsv(filePath, Encoding.UTF8).ToList();
+            var actualData = _csvReaderService.LoadCsv(filePath, Encoding.UTF8, CsvFormatType.PayPay).ToList();
 
             // Assert
             Assert.AreEqual(expectedData.Count, actualData.Count, "Number of records should match.");
@@ -60,7 +60,7 @@ namespace HouseholdBudgetCalculator.Tests
             string filePath = Path.Combine(_testDataPath, "empty_data.csv");
 
             // Act
-            var actualData = _csvReaderService.LoadCsv(filePath, Encoding.UTF8).ToList();
+            var actualData = _csvReaderService.LoadCsv(filePath, Encoding.UTF8, CsvFormatType.PayPay).ToList();
 
             // Assert
             Assert.IsNotNull(actualData, "The returned list should not be null.");

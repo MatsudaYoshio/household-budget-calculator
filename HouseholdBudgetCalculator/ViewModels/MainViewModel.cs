@@ -3,21 +3,43 @@ using CommunityToolkit.Mvvm.Input;
 using HouseholdBudgetCalculator.Models;
 using HouseholdBudgetCalculator.Services;
 using HouseholdBudgetCalculator.Views;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 
 namespace HouseholdBudgetCalculator.ViewModels
 {
-    public partial class MainViewModel(CsvReaderService csvReaderService, ProductFactory productFactory) : ObservableObject
+    public partial class MainViewModel : ObservableObject
     {
-        private readonly CsvReaderService _csvReaderService = csvReaderService;
-        private readonly ProductFactory _productFactory = productFactory;
+        private readonly CsvReaderService _csvReaderService;
+        private readonly ProductFactory _productFactory;
 
         [ObservableProperty]
         private ObservableCollection<CsvData> _csvDataList = [];
 
         [ObservableProperty]
         private ObservableCollection<CategorySummary> _categorySummaries = [];
+
+        [ObservableProperty]
+        private ObservableCollection<CsvFormatType> _csvFormatTypes = new();
+
+        [ObservableProperty]
+        private CsvFormatType _selectedCsvFormatType;
+
+        public MainViewModel(CsvReaderService csvReaderService, ProductFactory productFactory)
+        {
+            _csvReaderService = csvReaderService;
+            _productFactory = productFactory;
+            LoadCsvFormatTypes();
+        }
+
+        private void LoadCsvFormatTypes()
+        {
+            CsvFormatTypes = new ObservableCollection<CsvFormatType>(Enum.GetValues(typeof(CsvFormatType)).Cast<CsvFormatType>());
+            SelectedCsvFormatType = CsvFormatTypes.FirstOrDefault();
+        }
 
         [RelayCommand]
         private void LoadCsvFile()
@@ -30,7 +52,8 @@ namespace HouseholdBudgetCalculator.ViewModels
             if (openFileDialog.ShowDialog() == true)
             {
                 var filePath = openFileDialog.FileName;
-                var data = _csvReaderService.LoadCsv(filePath, Encoding.UTF8);
+                // TODO: 文字コードを選択できるようにする
+                var data = _csvReaderService.LoadCsv(filePath, Encoding.UTF8, SelectedCsvFormatType);
                 CsvDataList = [.. data];
                 var products = _productFactory.Create(data);
                 AggregateProductsByCategory(products);

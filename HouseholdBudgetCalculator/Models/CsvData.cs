@@ -8,15 +8,9 @@ namespace HouseholdBudgetCalculator.Models
 {
     public class CsvData
     {
-        [Name("利用日/キャンセル日")]
         [TypeConverter(typeof(DateOnlyConverter))]
         public DateOnly? DateOfUse { get; set; }
-
-        [Name("利用店名・商品名")]
-        [TypeConverter(typeof(ProductNameConverter))]
         public ProductName ProductName { get; set; } = null!;
-
-        [Name("支払総額")]
         public int TotalPaymentAmount { get; set; }
     }
 
@@ -34,19 +28,6 @@ namespace HouseholdBudgetCalculator.Models
         public string? ConvertToString(object? value, IWriterRow row, MemberMapData memberMapData)
         {
             return (value is DateOnly dateOnly) ? dateOnly.ToString(DATE_FORMAT, CultureInfo.InvariantCulture) : string.Empty;
-        }
-    }
-
-    public class ProductNameConverter : ITypeConverter
-    {
-        public object? ConvertFromString(string? text, IReaderRow row, MemberMapData memberMapData)
-        {
-            return text is not null ? new ProductName(text) : null;
-        }
-
-        public string? ConvertToString(object? value, IWriterRow row, MemberMapData memberMapData)
-        {
-            return value is ProductName productName ? productName.ToString() : string.Empty;
         }
     }
 }

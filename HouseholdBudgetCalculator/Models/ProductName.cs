@@ -1,9 +1,13 @@
 ﻿namespace HouseholdBudgetCalculator.Models
 {
-    public class ProductName(string productName)
+    public class ProductName
     {
-        private const string PAY_PAY_PREFIX = "ＰａｙＰａｙ　";
-        public string Value { get; } = productName.StartsWith(PAY_PAY_PREFIX) ? productName[PAY_PAY_PREFIX.Length..] : productName;
+        public string Value { get; }
+
+        public ProductName(string productName, string? prefix = null)
+        {
+            Value = prefix != null && productName.StartsWith(prefix) ? productName[prefix.Length..] : productName;
+        }
         public override string ToString() => Value;
     }
 }

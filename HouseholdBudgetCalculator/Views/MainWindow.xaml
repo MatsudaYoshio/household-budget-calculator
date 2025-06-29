@@ -13,6 +13,7 @@
         </Grid.RowDefinitions>
 
         <StackPanel Orientation="Horizontal" Margin="10">
+            <ComboBox ItemsSource="{Binding CsvFormatTypes}" SelectedItem="{Binding SelectedCsvFormatType}" Margin="5" Width="120"/>
             <Button Content="Load CSV" Command="{Binding LoadCsvFileCommand}" Margin="5,0"/>
             <Button Content="Show Summary" Command="{Binding ShowCategorySummaryWindowCommand}" Margin="5,0"/>
         </StackPanel>
