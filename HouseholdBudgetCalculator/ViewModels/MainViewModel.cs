@@ -3,10 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using HouseholdBudgetCalculator.Models;
 using HouseholdBudgetCalculator.Services;
 using HouseholdBudgetCalculator.Views;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Text;
 
 namespace HouseholdBudgetCalculator.ViewModels
@@ -23,7 +20,7 @@ namespace HouseholdBudgetCalculator.ViewModels
         private ObservableCollection<CategorySummary> _categorySummaries = [];
 
         [ObservableProperty]
-        private ObservableCollection<CsvFormatType> _csvFormatTypes = new();
+        private ObservableCollection<CsvFormatType> _csvFormatTypes = [];
 
         [ObservableProperty]
         private CsvFormatType _selectedCsvFormatType;
@@ -37,7 +34,7 @@ namespace HouseholdBudgetCalculator.ViewModels
 
         private void LoadCsvFormatTypes()
         {
-            CsvFormatTypes = new ObservableCollection<CsvFormatType>(Enum.GetValues(typeof(CsvFormatType)).Cast<CsvFormatType>());
+            CsvFormatTypes = new ObservableCollection<CsvFormatType>(Enum.GetValues<CsvFormatType>().Cast<CsvFormatType>());
             SelectedCsvFormatType = CsvFormatTypes.FirstOrDefault();
         }
 

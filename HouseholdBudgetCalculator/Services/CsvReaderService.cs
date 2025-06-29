@@ -1,11 +1,8 @@
 ﻿using CsvHelper;
 using CsvHelper.Configuration;
 using HouseholdBudgetCalculator.Models;
-using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Text;
 
 namespace HouseholdBudgetCalculator.Services
@@ -22,15 +19,16 @@ namespace HouseholdBudgetCalculator.Services
                 HasHeaderRecord = true,
                 BadDataFound = null,
                 MissingFieldFound = null,
-                TypeConverterCache = new TypeConverterCache()
             };
-            csvConfiguration.TypeConverterCache.AddConverter<DateOnly?>(new DateOnlyConverter());
 
             using var reader = new StreamReader(filePath, encoding);
             using var csv = new CsvReader(reader, csvConfiguration);
 
             csv.Read();
             csv.ReadHeader();
+
+            // ファイルが空、またはヘッダ行がない場合は空リストを返す
+            if (!csv.Read() || !csv.ReadHeader()) { return []; }
 
             var records = new List<ICsvData>();
             while (csv.Read())
@@ -50,7 +48,7 @@ namespace HouseholdBudgetCalculator.Services
             return records;
         }
 
-        private ICsvData CreateCsvDataTemplate(CsvFormatType formatType)
+        private static ICsvData CreateCsvDataTemplate(CsvFormatType formatType)
         {
             return formatType switch
             {
