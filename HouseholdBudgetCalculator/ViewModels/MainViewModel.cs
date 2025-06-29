@@ -3,10 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using HouseholdBudgetCalculator.Models;
 using HouseholdBudgetCalculator.Services;
 using HouseholdBudgetCalculator.Views;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Text;
 
 namespace HouseholdBudgetCalculator.ViewModels
@@ -23,7 +20,7 @@ namespace HouseholdBudgetCalculator.ViewModels
         private ObservableCollection<CategorySummary> _categorySummaries = [];
 
         [ObservableProperty]
-        private ObservableCollection<CsvFormatType> _csvFormatTypes = new();
+        private ObservableCollection<CsvFormatType> _csvFormatTypes = [];
 
         [ObservableProperty]
         private CsvFormatType _selectedCsvFormatType;
@@ -52,7 +49,6 @@ namespace HouseholdBudgetCalculator.ViewModels
             if (openFileDialog.ShowDialog() == true)
             {
                 var filePath = openFileDialog.FileName;
-                // TODO: 文字コードを選択できるようにする
                 var data = _csvReaderService.LoadCsv(filePath, Encoding.UTF8, SelectedCsvFormatType);
                 CsvDataList = [.. data];
                 var products = _productFactory.Create(data);

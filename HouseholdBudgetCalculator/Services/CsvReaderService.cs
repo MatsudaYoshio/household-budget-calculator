@@ -17,11 +17,7 @@ namespace HouseholdBudgetCalculator.Services
                 HasHeaderRecord = true,
                 BadDataFound = null,
                 MissingFieldFound = null,
-                // DateOnlyConverter を CsvConfiguration に登録
-                TypeConverterCache = new TypeConverterCache()
             };
-            csvConfiguration.TypeConverterCache.AddConverter<DateOnly?>(new DateOnlyConverter());
-
 
             using var reader = new StreamReader(filePath, encoding);
             using var csv = new CsvReader(reader, csvConfiguration);
