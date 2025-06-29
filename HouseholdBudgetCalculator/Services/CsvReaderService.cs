@@ -27,9 +27,6 @@ namespace HouseholdBudgetCalculator.Services
             csv.Read();
             csv.ReadHeader();
 
-            // ファイルが空、またはヘッダ行がない場合は空リストを返す
-            if (!csv.Read() || !csv.ReadHeader()) { return []; }
-
             var records = new List<ICsvData>();
             while (csv.Read())
             {

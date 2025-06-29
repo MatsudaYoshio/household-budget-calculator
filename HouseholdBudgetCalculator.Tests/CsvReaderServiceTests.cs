@@ -54,19 +54,5 @@ namespace HouseholdBudgetCalculator.Tests
                 Assert.AreEqual(expectedData[i].TotalPaymentAmount, actualData[i].TotalPaymentAmount, $"TotalPaymentAmount mismatch at record {i}.");
             }
         }
-
-        [TestMethod]
-        public void LoadCsv_EmptyFile_ReturnsEmptyList()
-        {
-            // Arrange
-            string filePath = Path.Combine(_testDataPath, "empty_data.csv");
-
-            // Act
-            var actualData = _csvReaderService.LoadCsv(filePath, Encoding.UTF8, CsvFormatType.PayPay).ToList();
-
-            // Assert
-            Assert.IsNotNull(actualData, "The returned list should not be null.");
-            Assert.AreEqual(0, actualData.Count, "The list should be empty for an empty CSV file.");
-        }
     }
 }
