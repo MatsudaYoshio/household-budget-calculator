@@ -12,10 +12,11 @@ namespace HouseholdBudgetCalculator.Models.Conveters
         public object? ConvertFromString(string? text, IReaderRow row, MemberMapData memberMapData)
         {
             if (string.IsNullOrEmpty(text)) return null;
-            if (DateOnly.TryParseExact(text, DATE_FORMAT, CultureInfo.InvariantCulture, DateTimeStyles.None, out var dateOnly)) return dateOnly;
-            // TryParseExactが失敗した場合、nullではなく例外をスローするか、エラー処理を検討する
-            // ここでは一旦 null を返す（CsvHelperのデフォルトの挙動に近い）
-            return null;
+            if (DateOnly.TryParseExact(text, DATE_FORMAT, CultureInfo.InvariantCulture, DateTimeStyles.None, out var dateOnly))
+            {
+                return dateOnly;
+            }
+            throw new FormatException($"The string '{text}' is not a valid date in the format '{DATE_FORMAT}'.");
         }
 
         public string? ConvertToString(object? value, IWriterRow row, MemberMapData memberMapData)
