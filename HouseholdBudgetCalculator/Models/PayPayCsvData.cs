@@ -1,25 +1,19 @@
 using CsvHelper.Configuration.Attributes;
 using HouseholdBudgetCalculator.Models.Conveters;
-using HouseholdBudgetCalculator.Services;
 
 namespace HouseholdBudgetCalculator.Models
 {
     public class PayPayCsvData : CsvData
     {
+        [Name("利用日/キャンセル日")]
         [TypeConverter(typeof(DateOnlyConverter))]
         public DateOnly? DateOfUse { get; set; }
-        public ProductName ProductName { get; set; } = null!;
-        public int TotalPaymentAmount { get; set; }
-        public CsvFormatDefinition FormatDefinition { get; }
 
-        public PayPayCsvData()
-        {
-            FormatDefinition = new CsvFormatDefinition(
-                "利用日/キャンセル日",
-                "利用店名・商品名",
-                "支払総額",
-                "ＰａｙＰａｙ　"
-            );
-        }
+        [Name("利用店名・商品名")]
+        [TypeConverter(typeof(ProductNameConverter))]
+        public ProductName ProductName { get; set; } = null!;
+
+        [Name("支払総額")]
+        public int TotalPaymentAmount { get; set; }
     }
 }

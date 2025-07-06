@@ -9,50 +9,16 @@ namespace HouseholdBudgetCalculator.Services
 {
     public class CsvReaderService
     {
-        public List<CsvData> LoadCsv(string filePath, Encoding encoding, CsvFormatType formatType)
+        public List<T> LoadCsv<T>(string filePath, Encoding encoding) where T : CsvData
         {
-            CsvData csvDataTemplate = CreateCsvDataTemplate(formatType);
-            var formatDefinition = csvDataTemplate.FormatDefinition;
-
-            var csvConfiguration = new CsvConfiguration(CultureInfo.InvariantCulture)
+            using var reader = new StreamReader(filePath, encoding);
+            using var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture)
             {
                 HasHeaderRecord = true,
                 BadDataFound = null,
                 MissingFieldFound = null,
-            };
-
-            using var reader = new StreamReader(filePath, encoding);
-            using var csv = new CsvReader(reader, csvConfiguration);
-
-            csv.Read();
-            csv.ReadHeader();
-
-            var records = new List<CsvData>();
-            while (csv.Read())
-            {
-                var dateOfUse = csv.GetField<DateOnly?>(formatDefinition.DateOfUseHeader);
-                var productNameString = csv.GetField<string>(formatDefinition.ProductNameHeader);
-                var productName = new ProductName(productNameString ?? string.Empty, formatDefinition.ProductNamePrefix);
-                var totalPaymentAmount = csv.GetField<int>(formatDefinition.TotalPaymentAmountHeader);
-
-                // インスタンスの生成方法を改善する必要があるかもしれない
-                CsvData recordInstance = CreateCsvDataTemplate(formatType);
-                recordInstance.DateOfUse = dateOfUse;
-                recordInstance.ProductName = productName;
-                recordInstance.TotalPaymentAmount = totalPaymentAmount;
-                records.Add(recordInstance);
-            }
-            return records;
-        }
-
-        private static CsvData CreateCsvDataTemplate(CsvFormatType formatType)
-        {
-            return formatType switch
-            {
-                CsvFormatType.PayPay => new PayPayCsvData(),
-                // 他のCSV形式のインスタンス生成をここに追加
-                _ => throw new ArgumentOutOfRangeException(nameof(formatType), $"Unsupported CSV format: {formatType}"),
-            };
+            });
+            return [.. csv.GetRecords<T>()];
         }
     }
 }

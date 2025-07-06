@@ -1,9 +1,9 @@
 ﻿namespace HouseholdBudgetCalculator.Models
 {
-    public class ProductName(string productName, string? prefix = null)
+    //今は単純な文字列ラッパーだが、将来の拡張性を考慮してクラス化
+    public class ProductName(string name)
     {
-        public string Value { get; } = prefix != null && productName.StartsWith(prefix) ? productName[prefix.Length..] : productName;
-
+        public string Value { get; } = name;
         public override string ToString() => Value;
     }
 }

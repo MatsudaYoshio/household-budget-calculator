@@ -1,6 +1,5 @@
 using CsvHelper.Configuration.Attributes;
 using HouseholdBudgetCalculator.Models.Conveters;
-using HouseholdBudgetCalculator.Services;
 
 namespace HouseholdBudgetCalculator.Models
 {
@@ -10,6 +9,5 @@ namespace HouseholdBudgetCalculator.Models
         DateOnly? DateOfUse { get; set; }
         ProductName ProductName { get; set; }
         int TotalPaymentAmount { get; set; }
-        CsvFormatDefinition FormatDefinition { get; }
     }
 }

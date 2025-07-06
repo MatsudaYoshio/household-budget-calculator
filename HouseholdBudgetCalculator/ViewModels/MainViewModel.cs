@@ -5,12 +5,13 @@ using HouseholdBudgetCalculator.Services;
 using HouseholdBudgetCalculator.Views;
 using System.Collections.ObjectModel;
 using System.Text;
+using static HouseholdBudgetCalculator.Models.CsvDataTypeMap;
 
 namespace HouseholdBudgetCalculator.ViewModels
 {
     public partial class MainViewModel : ObservableObject
     {
-        private readonly CsvReaderService _csvReaderService;
+        private readonly GenericCsvDataLoader _csvDataLoader;
         private readonly ProductFactory _productFactory;
 
         [ObservableProperty]
@@ -25,9 +26,9 @@ namespace HouseholdBudgetCalculator.ViewModels
         [ObservableProperty]
         private CsvFormatType _selectedCsvFormatType;
 
-        public MainViewModel(CsvReaderService csvReaderService, ProductFactory productFactory)
+        public MainViewModel(GenericCsvDataLoader csvDataLoader, ProductFactory productFactory)
         {
-            _csvReaderService = csvReaderService;
+            _csvDataLoader = csvDataLoader;
             _productFactory = productFactory;
             LoadCsvFormatTypes();
         }
@@ -49,8 +50,7 @@ namespace HouseholdBudgetCalculator.ViewModels
             if (openFileDialog.ShowDialog() == true)
             {
                 var filePath = openFileDialog.FileName;
-                // TODO: 文字コードを選択できるようにする
-                var data = _csvReaderService.LoadCsv(filePath, Encoding.UTF8, SelectedCsvFormatType);
+                var data = _csvDataLoader.Load(SelectedCsvFormatType, filePath, Encoding.UTF8);
                 CsvDataList = [.. data];
                 var products = _productFactory.Create(data);
                 AggregateProductsByCategory(products);
