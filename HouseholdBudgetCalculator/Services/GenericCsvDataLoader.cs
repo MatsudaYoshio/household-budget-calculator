@@ -11,12 +11,14 @@ namespace HouseholdBudgetCalculator.Services
         public List<CsvData> Load(CsvFormatType formatType, string filePath, Encoding encoding)
         {
             if (!TypeMap.TryGetValue(formatType, out var type))
-                throw new ArgumentException($"Unsupported format: {formatType}");
+                throw new ArgumentException($"Unsupported format: {formatType}. Available formats: {string.Join(", ", TypeMap.Keys)}");
 
             var method = typeof(CsvReaderService)
                 .GetMethod(nameof(CsvReaderService.LoadCsv), [typeof(string), typeof(Encoding)])
                 ?? throw new MissingMethodException($"Method '{nameof(CsvReaderService.LoadCsv)}' not found in '{typeof(CsvReaderService).Name}'.");
+
             method = method.MakeGenericMethod(type);
+
             var result = method.Invoke(_csvReaderService, [filePath, encoding]);
             if (result is System.Collections.IEnumerable enumerable)
             {
