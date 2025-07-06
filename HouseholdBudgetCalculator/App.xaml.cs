@@ -1,5 +1,4 @@
-﻿using HouseholdBudgetCalculator.Models;
-using HouseholdBudgetCalculator.Services;
+﻿using HouseholdBudgetCalculator.Services;
 using HouseholdBudgetCalculator.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using System.Windows;
@@ -13,7 +12,6 @@ public partial class App : Application
         base.OnStartup(e);
 
         var services = new ServiceCollection();
-        services.AddSingleton(CsvDataTypeMap.TypeMap);
         services.AddSingleton<GenericCsvDataLoader>();
         services.AddSingleton<CsvReaderService>();
         services.AddSingleton<ProductRepository>();
