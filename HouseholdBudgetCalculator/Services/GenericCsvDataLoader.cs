@@ -13,7 +13,8 @@ namespace HouseholdBudgetCalculator.Services
             if (!TypeMap.TryGetValue(formatType, out var type))
                 throw new ArgumentException($"Unsupported format: {formatType}");
 
-            var method = typeof(CsvReaderService).GetMethod("LoadCsv")!.MakeGenericMethod(type);
+            var method = typeof(CsvReaderService).GetMethod(nameof(CsvReaderService.LoadCsv)) ?? throw new MissingMethodException($"Method '{nameof(CsvReaderService.LoadCsv)}' not found in '{typeof(CsvReaderService).Name}'.");
+            method = method.MakeGenericMethod(type);
             var result = method.Invoke(_csvReaderService, [filePath, encoding]);
             if (result is System.Collections.IEnumerable enumerable)
             {
