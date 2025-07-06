@@ -1,6 +1,6 @@
 ﻿namespace HouseholdBudgetCalculator.Models
 {
-    //今は単純な文字列ラッパーだが、将来の拡張性を考慮してクラス化
+    // ProductName is currently a simple string wrapper, but it is implemented as a class for future extensibility.
     public class ProductName(string name)
     {
         public string Value { get; } = name;
