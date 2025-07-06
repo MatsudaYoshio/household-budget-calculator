@@ -1,9 +1,10 @@
 using CsvHelper.Configuration.Attributes;
-using HouseholdBudgetCalculator.Services; // CsvFormatDefinition を使うため
+using HouseholdBudgetCalculator.Models.Conveters;
+using HouseholdBudgetCalculator.Services;
 
 namespace HouseholdBudgetCalculator.Models
 {
-    public class PayPayCsvData : ICsvData
+    public class PayPayCsvData : CsvData
     {
         [TypeConverter(typeof(DateOnlyConverter))]
         public DateOnly? DateOfUse { get; set; }

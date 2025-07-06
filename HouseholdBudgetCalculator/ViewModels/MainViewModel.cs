@@ -14,7 +14,7 @@ namespace HouseholdBudgetCalculator.ViewModels
         private readonly ProductFactory _productFactory;
 
         [ObservableProperty]
-        private ObservableCollection<ICsvData> _csvDataList = [];
+        private ObservableCollection<CsvData> _csvDataList = [];
 
         [ObservableProperty]
         private ObservableCollection<CategorySummary> _categorySummaries = [];

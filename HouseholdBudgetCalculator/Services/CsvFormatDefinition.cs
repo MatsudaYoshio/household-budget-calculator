@@ -2,8 +2,7 @@ namespace HouseholdBudgetCalculator.Services
 {
     public enum CsvFormatType
     {
-        PayPay,
-        // 他のCSV形式をここに追加
+        PayPay
     }
 
     public class CsvFormatDefinition(string dateOfUseHeader, string productNameHeader, string totalPaymentAmountHeader, string? productNamePrefix = null)

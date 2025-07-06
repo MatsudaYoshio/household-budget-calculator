@@ -3,7 +3,7 @@ using CsvHelper.Configuration;
 using CsvHelper.TypeConversion;
 using System.Globalization;
 
-namespace HouseholdBudgetCalculator.Models
+namespace HouseholdBudgetCalculator.Models.Conveters
 {
     public class DateOnlyConverter : ITypeConverter
     {
@@ -20,7 +20,7 @@ namespace HouseholdBudgetCalculator.Models
 
         public string? ConvertToString(object? value, IWriterRow row, MemberMapData memberMapData)
         {
-            return (value is DateOnly dateOnly) ? dateOnly.ToString(DATE_FORMAT, CultureInfo.InvariantCulture) : string.Empty;
+            return value is DateOnly dateOnly ? dateOnly.ToString(DATE_FORMAT, CultureInfo.InvariantCulture) : string.Empty;
         }
     }
 }

@@ -9,9 +9,9 @@ namespace HouseholdBudgetCalculator.Services
 {
     public class CsvReaderService
     {
-        public List<ICsvData> LoadCsv(string filePath, Encoding encoding, CsvFormatType formatType)
+        public List<CsvData> LoadCsv(string filePath, Encoding encoding, CsvFormatType formatType)
         {
-            ICsvData csvDataTemplate = CreateCsvDataTemplate(formatType);
+            CsvData csvDataTemplate = CreateCsvDataTemplate(formatType);
             var formatDefinition = csvDataTemplate.FormatDefinition;
 
             var csvConfiguration = new CsvConfiguration(CultureInfo.InvariantCulture)
@@ -27,7 +27,7 @@ namespace HouseholdBudgetCalculator.Services
             csv.Read();
             csv.ReadHeader();
 
-            var records = new List<ICsvData>();
+            var records = new List<CsvData>();
             while (csv.Read())
             {
                 var dateOfUse = csv.GetField<DateOnly?>(formatDefinition.DateOfUseHeader);
@@ -36,7 +36,7 @@ namespace HouseholdBudgetCalculator.Services
                 var totalPaymentAmount = csv.GetField<int>(formatDefinition.TotalPaymentAmountHeader);
 
                 // インスタンスの生成方法を改善する必要があるかもしれない
-                ICsvData recordInstance = CreateCsvDataTemplate(formatType);
+                CsvData recordInstance = CreateCsvDataTemplate(formatType);
                 recordInstance.DateOfUse = dateOfUse;
                 recordInstance.ProductName = productName;
                 recordInstance.TotalPaymentAmount = totalPaymentAmount;
@@ -45,7 +45,7 @@ namespace HouseholdBudgetCalculator.Services
             return records;
         }
 
-        private static ICsvData CreateCsvDataTemplate(CsvFormatType formatType)
+        private static CsvData CreateCsvDataTemplate(CsvFormatType formatType)
         {
             return formatType switch
             {
