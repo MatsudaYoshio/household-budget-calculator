@@ -16,7 +16,7 @@ namespace HouseholdBudgetCalculator.Models.Conveters
             {
                 return dateOnly;
             }
-            throw new FormatException($"The string '{text}' is not a valid date in the format '{DATE_FORMAT}'.");
+            throw new TypeConverterException(this, memberMapData, text, row.Context, $"The string '{text}' is not a valid date in the format '{DATE_FORMAT}'.");
         }
 
         public string? ConvertToString(object? value, IWriterRow row, MemberMapData memberMapData)
