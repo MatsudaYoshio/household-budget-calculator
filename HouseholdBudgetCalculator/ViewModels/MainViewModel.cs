@@ -35,7 +35,7 @@ namespace HouseholdBudgetCalculator.ViewModels
 
         private void LoadCsvFormatTypes()
         {
-            CsvFormatTypes = new ObservableCollection<CsvFormatType>(Enum.GetValues<CsvFormatType>().Cast<CsvFormatType>());
+            CsvFormatTypes = new ObservableCollection<CsvFormatType>(Enum.GetValues<CsvFormatType>());
             SelectedCsvFormatType = CsvFormatTypes.FirstOrDefault();
         }
 
