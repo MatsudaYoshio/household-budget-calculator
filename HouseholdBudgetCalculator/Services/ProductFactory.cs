@@ -6,7 +6,7 @@ namespace HouseholdBudgetCalculator.Services
     {
         private readonly ProductRepository _productRepository = productRepository;
 
-        public Product Create(CsvData csvData)
+        private Product Create(CsvData csvData)
         {
             var category = _productRepository.Get(csvData.ProductName.Value);
 

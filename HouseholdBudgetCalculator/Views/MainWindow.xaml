@@ -13,15 +13,22 @@
         </Grid.RowDefinitions>
 
         <StackPanel Orientation="Horizontal" Margin="10">
+            <ComboBox ItemsSource="{Binding CsvFormatTypes}" SelectedItem="{Binding SelectedCsvFormatType}" Margin="5" Width="120"/>
             <Button Content="Load CSV" Command="{Binding LoadCsvFileCommand}" Margin="5,0"/>
             <Button Content="Show Summary" Command="{Binding ShowCategorySummaryWindowCommand}" Margin="5,0"/>
         </StackPanel>
 
-        <DataGrid Grid.Row="1" ItemsSource="{Binding CsvDataList}" AutoGenerateColumns="False" Margin="10" HeadersVisibility="Column">
+        <DataGrid Grid.Row="1" ItemsSource="{Binding CsvDataList}" AutoGenerateColumns="False" Margin="10" HeadersVisibility="Column" IsReadOnly="True">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="利用日/キャンセル日" Binding="{Binding DateOfUse, StringFormat='yyyy/M/d'}" />
-                <DataGridTextColumn Header="利用店名・商品名" Binding="{Binding ProductName}" />
-                <DataGridTextColumn Header="支払総額" Binding="{Binding TotalPaymentAmount}" />
+                <DataGridTextColumn Header="利用日" Binding="{Binding DateOfUse, StringFormat='yyyy/MM/dd'}" Width="Auto"/>
+                <DataGridTextColumn Header="利用店名・商品名" Binding="{Binding ProductName.Value}" Width="*"/>
+                <DataGridTextColumn Header="支払総額" Binding="{Binding TotalPaymentAmount, StringFormat=N0}" Width="Auto">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment" Value="Right"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

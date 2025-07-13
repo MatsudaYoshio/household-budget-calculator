@@ -12,6 +12,7 @@ public partial class App : Application
         base.OnStartup(e);
 
         var services = new ServiceCollection();
+        services.AddSingleton<GenericCsvDataLoader>();
         services.AddSingleton<CsvReaderService>();
         services.AddSingleton<ProductRepository>();
         services.AddSingleton<ProductFactory>();

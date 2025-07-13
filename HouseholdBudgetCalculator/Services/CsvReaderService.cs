@@ -9,7 +9,7 @@ namespace HouseholdBudgetCalculator.Services
 {
     public class CsvReaderService
     {
-        public List<CsvData> LoadCsv(string filePath, Encoding encoding)
+        public List<T> LoadCsv<T>(string filePath, Encoding encoding) where T : CsvData
         {
             using var reader = new StreamReader(filePath, encoding);
             using var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture)
@@ -18,7 +18,7 @@ namespace HouseholdBudgetCalculator.Services
                 BadDataFound = null,
                 MissingFieldFound = null,
             });
-            return [.. csv.GetRecords<CsvData>()];
+            return [.. csv.GetRecords<T>()];
         }
     }
 }

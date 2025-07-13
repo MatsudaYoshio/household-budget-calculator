@@ -1,9 +1,9 @@
 ﻿namespace HouseholdBudgetCalculator.Models
 {
-    public class ProductName(string productName)
+    // ProductName is currently a simple string wrapper, but it is implemented as a class for future extensibility.
+    public class ProductName(string name)
     {
-        private const string PAY_PAY_PREFIX = "ＰａｙＰａｙ　";
-        public string Value { get; } = productName.StartsWith(PAY_PAY_PREFIX) ? productName[PAY_PAY_PREFIX.Length..] : productName;
+        public string Value { get; } = name ?? throw new ArgumentNullException(nameof(name), "Product name cannot be null.");
         public override string ToString() => Value;
     }
 }

@@ -5,19 +5,39 @@ using HouseholdBudgetCalculator.Services;
 using HouseholdBudgetCalculator.Views;
 using System.Collections.ObjectModel;
 using System.Text;
+using static HouseholdBudgetCalculator.Models.CsvDataTypeMap;
 
 namespace HouseholdBudgetCalculator.ViewModels
 {
-    public partial class MainViewModel(CsvReaderService csvReaderService, ProductFactory productFactory) : ObservableObject
+    public partial class MainViewModel : ObservableObject
     {
-        private readonly CsvReaderService _csvReaderService = csvReaderService;
-        private readonly ProductFactory _productFactory = productFactory;
+        private readonly GenericCsvDataLoader _csvDataLoader;
+        private readonly ProductFactory _productFactory;
 
         [ObservableProperty]
         private ObservableCollection<CsvData> _csvDataList = [];
 
         [ObservableProperty]
         private ObservableCollection<CategorySummary> _categorySummaries = [];
+
+        [ObservableProperty]
+        private ObservableCollection<CsvFormatType> _csvFormatTypes = [];
+
+        [ObservableProperty]
+        private CsvFormatType _selectedCsvFormatType;
+
+        public MainViewModel(GenericCsvDataLoader csvDataLoader, ProductFactory productFactory)
+        {
+            _csvDataLoader = csvDataLoader;
+            _productFactory = productFactory;
+            LoadCsvFormatTypes();
+        }
+
+        private void LoadCsvFormatTypes()
+        {
+            CsvFormatTypes = new ObservableCollection<CsvFormatType>(Enum.GetValues<CsvFormatType>());
+            SelectedCsvFormatType = CsvFormatTypes.FirstOrDefault();
+        }
 
         [RelayCommand]
         private void LoadCsvFile()
@@ -30,7 +50,7 @@ namespace HouseholdBudgetCalculator.ViewModels
             if (openFileDialog.ShowDialog() == true)
             {
                 var filePath = openFileDialog.FileName;
-                var data = _csvReaderService.LoadCsv(filePath, Encoding.UTF8);
+                var data = _csvDataLoader.Load(SelectedCsvFormatType, filePath, Encoding.UTF8);
                 CsvDataList = [.. data];
                 var products = _productFactory.Create(data);
                 AggregateProductsByCategory(products);
