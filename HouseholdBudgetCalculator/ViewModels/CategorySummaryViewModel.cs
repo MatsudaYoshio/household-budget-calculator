@@ -1,5 +1,6 @@
-﻿using HouseholdBudgetCalculator.Models;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
+
+using HouseholdBudgetCalculator.Models;
 
 namespace HouseholdBudgetCalculator.ViewModels
 {

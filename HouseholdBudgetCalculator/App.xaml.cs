@@ -1,11 +1,13 @@
-﻿using HouseholdBudgetCalculator.Services;
+﻿using System.Windows;
+
+using HouseholdBudgetCalculator.Services;
 using HouseholdBudgetCalculator.ViewModels;
+
 using Microsoft.Extensions.DependencyInjection;
-using System.Windows;
 
 namespace HouseholdBudgetCalculator;
 
-public partial class App : Application
+public partial class App: Application
 {
     protected override void OnStartup(StartupEventArgs e)
     {
