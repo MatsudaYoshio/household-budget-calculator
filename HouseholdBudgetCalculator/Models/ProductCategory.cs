@@ -8,6 +8,7 @@ public enum ProductCategory
     Healthcare,
     Education,
     Clothing,
+    DailyNecessities
 }
 
 public static class ProductCategoryExtensions
