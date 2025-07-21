@@ -1,15 +1,18 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using System.Collections.ObjectModel;
+using System.Text;
+
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+
 using HouseholdBudgetCalculator.Models;
 using HouseholdBudgetCalculator.Services;
 using HouseholdBudgetCalculator.Views;
-using System.Collections.ObjectModel;
-using System.Text;
+
 using static HouseholdBudgetCalculator.Models.CsvDataTypeMap;
 
 namespace HouseholdBudgetCalculator.ViewModels
 {
-    public partial class MainViewModel : ObservableObject
+    public partial class MainViewModel: ObservableObject
     {
         private readonly GenericCsvDataLoader _csvDataLoader;
         private readonly ProductFactory _productFactory;

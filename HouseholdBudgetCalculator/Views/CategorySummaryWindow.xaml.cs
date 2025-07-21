@@ -1,11 +1,12 @@
-﻿using HouseholdBudgetCalculator.ViewModels;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Input;
 
+using HouseholdBudgetCalculator.ViewModels;
+
 namespace HouseholdBudgetCalculator.Views
 {
-    public partial class CategorySummaryWindow : Window
+    public partial class CategorySummaryWindow: Window
     {
         public CategorySummaryWindow(CategorySummaryViewModel viewModel)
         {

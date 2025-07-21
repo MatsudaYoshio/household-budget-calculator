@@ -1,15 +1,14 @@
-﻿namespace HouseholdBudgetCalculator.Models
-{
-    public static class CsvDataTypeMap
-    {
-        public enum CsvFormatType
-        {
-            PayPay
-        }
+﻿namespace HouseholdBudgetCalculator.Models;
 
-        public static readonly Dictionary<CsvFormatType, Type> TypeMap = new()
-        {
-            { CsvFormatType.PayPay, typeof(PayPayCsvData) },
-        };
+public static class CsvDataTypeMap
+{
+    public enum CsvFormatType
+    {
+        PayPay
     }
+
+    public static readonly Dictionary<CsvFormatType, Type> TypeMap = new()
+    {
+        { CsvFormatType.PayPay, typeof(PayPayCsvData) },
+    };
 }
