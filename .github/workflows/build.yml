@@ -29,6 +29,9 @@ jobs:
           dotnet restore ./${{ env.PROJECT_NAME }}/${{ env.PROJECT_NAME }}.csproj
           dotnet restore ./${{ env.PROJECT_NAME }}.Tests/${{ env.PROJECT_NAME }}.Tests.csproj
 
+      - name: コードフォーマットのチェック
+        run: dotnet format --verify-no-changes --verbosity diagnostic
+
       - name: テストの実行
         run: dotnet test ./${{ env.PROJECT_NAME }}.Tests/${{ env.PROJECT_NAME }}.Tests.csproj --configuration Release --no-restore
 
