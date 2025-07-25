@@ -4,7 +4,7 @@
 #
 
 # Get list of staged C# files
-STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(cs|csproj|sln)$')
+STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM -- '*.cs' '*.csproj' '*.sln')
 
 if [ -z "$STAGED_FILES" ]; then
     echo "No C# files staged for commit."
