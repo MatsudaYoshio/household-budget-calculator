@@ -10,7 +10,20 @@ A sleek WPF application that reads payment data from PayPay CSV files and catego
 
 ---
 
-## Build Instructions
+## Development Setup
+
+### Git Hooks Setup
+
+To automatically format C# code before commits, run the setup script:
+
+**Windows Command Prompt:**
+```cmd
+setup-hooks.bat
+```
+
+This will configure Git to automatically run `dotnet format` on staged C# files before each commit.
+
+### Build Instructions
 
 To build the application in Release mode, run the following command:
 
