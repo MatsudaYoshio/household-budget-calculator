@@ -15,6 +15,7 @@ This style guide follows standard C# conventions to ensure readability, maintain
 ## ✅ Coding Rules (Design Policies)
 
 ### Naming and Responsibilities
+
 - Use `PascalCase` for type names, method names, and property names.
 - Use `camelCase` for local variables and method parameters.
 - Use `_camelCase` for private fields (e.g., `_totalAmount`).
@@ -22,6 +23,7 @@ This style guide follows standard C# conventions to ensure readability, maintain
 - Separate UI event handling from logic by strictly adhering to the **MVVM pattern**.
 
 ### ✅ Use Named Arguments When a Method Has Multiple Parameters
+
 - ✅ Recommended:  
   `PrintOrderDetails(productName: "Red Mug", sellerName: "Gift Shop", orderNum: 31);`
 - ❌ Not Recommended:  
