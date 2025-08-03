@@ -12,6 +12,10 @@ A sleek WPF application that reads payment data from PayPay CSV files and catego
 
 ## Development Setup
 
+### Style Guide
+
+This project follows a specific style guide to ensure code consistency and quality. Please refer to [STYLEGUIDE.md](STYLEGUIDE.md) for detailed coding conventions and best practices.
+
 ### Git Hooks Setup
 
 To automatically format C# code before commits, run the setup script:
