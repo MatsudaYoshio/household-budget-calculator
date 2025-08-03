@@ -16,9 +16,9 @@ This style guide follows standard C# conventions to ensure readability, maintain
 
 ### Naming and Responsibilities
 
-- Use `PascalCase` for type names, method names, and property names.
-- Use `camelCase` for local variables and method parameters.
-- Use `_camelCase` for private fields (e.g., `_totalAmount`).
+- Apply `PascalCase` to type, method, and property names.
+- Prefer `camelCase` for local variables and parameters.
+- Prefix private fields with an underscore and use `_camelCase` (e.g., `_totalAmount`).
 - Classes must follow the **Single Responsibility Principle (SRP)**, and shared logic should be extracted into helper classes as needed.
 - Separate UI event handling from logic by strictly adhering to the **MVVM pattern**.
 
