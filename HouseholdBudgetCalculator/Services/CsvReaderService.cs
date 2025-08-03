@@ -19,7 +19,9 @@ public class CsvReaderService
             HasHeaderRecord = true,
             BadDataFound = null,
             MissingFieldFound = null,
+            ShouldSkipRecord = static args =>
+            string.IsNullOrWhiteSpace(args.Row.Context.Parser?.Record?.ElementAtOrDefault(0))
         });
-        return [.. csv.GetRecords<T>()];
+        return csv.GetRecords<T>().ToList();
     }
 }
